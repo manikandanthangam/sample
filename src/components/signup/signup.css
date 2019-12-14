@@ -1,14 +1,58 @@
+#SignupContainer {
+    margin-top:30%;
+    margin-top:30vh;
+    padding:20px;
+    max-width:700px;
+    background: rgba(212,228,239,1);
+    background: -moz-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(158,204,219,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(212,228,239,1)), color-stop(100%, rgba(158,204,219,1)));
+    background: -webkit-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(158,204,219,1) 100%);
+    background: -o-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(158,204,219,1) 100%);
+    background: -ms-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(158,204,219,1) 100%);
+    background: linear-gradient(to right, rgba(212,228,239,1) 0%, rgba(158,204,219,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#9eccdb', GradientType=1 );
+
+    border-radius: 30px 30px 30px 30px;
+-moz-border-radius: 30px 30px 30px 30px;
+-webkit-border-radius: 30px 30px 30px 30px;
+border: 2px solid #000000;
+-webkit-box-shadow: -1px 1px 18px 0px rgba(0,0,0,0.7);
+-moz-box-shadow: -1px 1px 18px 0px rgba(0,0,0,0.7);
+box-shadow: -1px 1px 18px 0px rgba(0,0,0,0.7);
+
+}
 body{
-    background-color: #525252;
+    background: rgba(147,206,222,1);
+    background: -moz-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(42,157,189,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(42,157,189,1)));
+    background: -webkit-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(42,157,189,1) 100%);
+    background: -o-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(42,157,189,1) 100%);
+    background: -ms-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(42,157,189,1) 100%);
+    background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(42,157,189,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#2a9dbd', GradientType=1 );
 }
-.centered-form{
-    margin-top: 60px;
+.alert-danger {
+    border-radius: 5px;
+    padding-left: 7px;
+    padding: 3px 7px 3px 7px;
+    margin-top:3px;
 }
-.centered-form .panel{
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+.SubmitBtnContainer {
+    text-align:right;
 }
-.centered-form .form-container {
-    margin-left:auto;
-    margin-right:auto;
+.SubmitBtnContainer > .btn {
+    background-color:#33869a;
+    border-color:#447784;
+}        
+.SubmitBtnContainer > .btn:hover {
+    background-color:#10404c;
+}
+.FormContainer {
+    margin-bottom:0px;
+}
+@media (max-width: 768px) {
+.btn, .btn-group {
+        width:100%;
+        margin-top:20px;
+    }
 }
