@@ -17,7 +17,13 @@ class Header extends Component {
                             <Link to={'/Dummy'} className='nav-link'>Dummy</Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to={'./Listdata'} className='nav-link'>Listdata</Link>
+                            <Link to={'/Listdata'} className='nav-link'>Listdata</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={'/Doughnutchart'} className="nav-link">Doughnut Chart</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={'/Dashboard'} className="nav-link">Dashboard</Link>
                         </li>
                     </ul>
                 </nav>
