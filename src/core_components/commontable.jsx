@@ -12,7 +12,7 @@ class CommonTable extends Component {
 
     render() {
         let tableHeader = [];
-        tableHeader = this.tablelistHeader.map((eachElement)=>{
+        tableHeader = this.tablelistHeader.map((eachElement) => {
             // console.log(eachElement);
             return <th>{eachElement}</th>;
         });
@@ -29,19 +29,25 @@ class CommonTable extends Component {
         //     tableBody.push(eachRowData);
         // }
         // console.log(tableBody);
-        
-        tableBody = this.tableListData.map((eachElement)=>{
+        // tableBody = this.tableListData.map((eachElement) => {
             // console.log(eachElement.id);
             // return false;
             // console.log(eachElement.header);
-            return <tr>
-            <td>{eachElement.postId}</td>
-            <td>{eachElement.id}</td>
-            <td>{eachElement.name}</td>
-            <td>{eachElement.email}</td>
-            <td>{eachElement.body}</td>
-            </tr>
-        });
+            // return <tr>
+            //     <td>{eachElement.postId}</td>
+            //     <td>{eachElement.id}</td>
+            //     <td>{eachElement.name}</td>
+            //     <td>{eachElement.email}</td>
+            //     <td>{eachElement.body}</td>
+            // </tr>
+           // });
+        let tableBodyData = [];
+        for (let eachBodyData of this.tableListData) {
+            let eachBodyContent = this.tablelistHeader.map((eachHeadData)=> {
+                return <td>{eachBodyData[eachHeadData]}</td>;
+            });
+            tableBodyData.push(<tr>{eachBodyContent}</tr>);       
+        }
 
         return (
             <div className="TableContainer" id="TableContainer">
@@ -52,7 +58,7 @@ class CommonTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {tableBody}
+                        {tableBodyData}
                     </tbody>
                 </table>
             </div>
