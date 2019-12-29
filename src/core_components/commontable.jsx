@@ -4,6 +4,7 @@ class CommonTable extends Component {
     tableListData = [];
     constructor(props) {
         super(props);
+        console.log(this.props);
         this.tablelistHeader = this.props.header;
         this.tableListData = this.props.data;
         // console.log(this.tableListData);
@@ -11,6 +12,9 @@ class CommonTable extends Component {
     }
 
     render() {
+        this.tableListData = this.props.data;
+
+        console.log(this.props.data);
         let tableHeader = [];
         tableHeader = this.tablelistHeader.map((eachElement) => {
             // console.log(eachElement);
@@ -49,6 +53,8 @@ class CommonTable extends Component {
             tableBodyData.push(<tr>{eachBodyContent}</tr>);       
         }
 
+        console.log(this.tableListData);
+        console.log(tableBodyData);
         return (
             <div className="TableContainer" id="TableContainer">
                 <table className="table table-bordered tablelist">
