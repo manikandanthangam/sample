@@ -1500,12 +1500,11 @@ class Doughnutchart extends Component {
 		// };
 
 	}
-	constructor(props){
-		super(props);
-		 
+	// constructor(props){
+	// 	super(props);
 		// this.mapdata = this.GenerateChart(this.props.data);
 		// console.log(this.mapdata);s
-	}
+	// }
 	
 
 	render() {

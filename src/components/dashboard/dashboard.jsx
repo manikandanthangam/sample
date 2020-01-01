@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './dashboard.css';
-import { Doughnut } from 'react-chartjs-2';
+// import { Doughnut } from 'react-chartjs-2';
 import CommonTable from '../../core_components/commontable';
 import Charts from '../charts/charts';
 

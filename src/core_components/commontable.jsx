@@ -4,7 +4,7 @@ class CommonTable extends Component {
     tableListData = [];
     constructor(props) {
         super(props);
-        console.log(this.props);
+        // console.log(this.props);
         this.tablelistHeader = this.props.header;
         this.tableListData = this.props.data;
         // console.log(this.tableListData);
@@ -21,7 +21,7 @@ class CommonTable extends Component {
             return <th>{eachElement}</th>;
         });
 
-        let tableBody = [];
+        // let tableBody = [];
         // for (let eachData of this.tableListData) {
         //     let eachRowData = <tr>
         //         <td>{eachData.postId}</td>

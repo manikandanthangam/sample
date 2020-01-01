@@ -18,10 +18,10 @@ class Listdata extends Component {
     };
     axios.get('http://localhost:3001/comments/get').then((response) => {
       // handle success
-      console.log(response.data.data);
+      // console.log(response.data.data);
       if (response.data && response.data.data) {
         let myData = response.data.data;
-        console.log(myData);
+        // console.log(myData);
         this.commentsData = myData;
         this.setState({ isDataRecieved: true });
 
