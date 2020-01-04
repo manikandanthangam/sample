@@ -1,4 +1,4 @@
-#ListContainer {
+#ListContainer, #ListViewContainer, .profileview-row {
     margin-top: 10%;
     margin-top: 10vh;
     padding: 20px;
@@ -21,7 +21,13 @@
     -moz-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
     box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
 }
-
+#ListViewContainer, .profileview-container, .profileview-row {
+    max-width:98%;
+    max-height:100%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:10vh;
+}
 body {
     background: rgba(147, 206, 222, 1);
     background: -moz-linear-gradient(left, rgba(147, 206, 222, 1) 0%, rgba(117, 189, 209, 1) 41%, rgba(42, 157, 189, 1) 100%);
@@ -36,7 +42,59 @@ body {
 .tablelist, .tablelist th, .tablelist td {
     border: solid #356599 1px;
 }
-
 .tablelist thead th {
     border-bottom: solid #356599 2px;
+}
+.employeetable {
+    display:none;
+}
+.profile-content {
+    border: 1px solid #356599;
+    border-radius: 30px 30px 30px 30px;
+    -moz-border-radius: 30px 30px 30px 30px;
+    -webkit-border-radius: 30px 30px 30px 30px;
+    -webkit-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    margin-bottom:20px;
+}
+.profile-data {
+    text-align:center;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.profile-img > img {
+    /* max-width:40%; */
+    border-radius: 30px 30px 30px 30px;
+    -moz-border-radius: 30px 30px 30px 30px;
+    -webkit-border-radius: 30px 30px 30px 30px;
+    border: 0px solid #000000;
+    -webkit-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+}
+.profileview-img {
+    text-align:center;
+    margin-bottom:20px;
+}
+.profileview-img > img {
+    /* max-width:50%; */
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    border-radius: 50% 50% 50% 50%;
+    -moz-border-radius: 50% 50% 50% 50%;
+    -webkit-border-radius: 50% 50% 50% 50%;
+    border: 0px solid #000000;
+    -webkit-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+}
+.profile-view > Link {
+    margin-top:0px;
+}
+.profileview-backlink {
+    clear:both;
+    width:100%;
+    margin-bottom:30px;
 }

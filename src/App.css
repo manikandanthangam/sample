@@ -20,3 +20,18 @@
 .App-link {
   color: #09d3ac;
 }
+
+.btn-primary {
+  background-color: #33869a !important;
+  border-color: #447784 !important;
+}
+.btn-primary:hover {
+  background-color: #10404c !important;
+}
+.btn-normal {
+  background-color:green !important;
+}
+.btn-active {
+  background-color: red !important;
+}
+

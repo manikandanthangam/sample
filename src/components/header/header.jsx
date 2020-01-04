@@ -11,7 +11,7 @@ class Header extends Component {
                             <Link to={'/Login'} className="nav-link">Login</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/Signup">Signup</a>
+                            <Link to={'/Signup'} className="nav-link">Signup</Link>
                         </li>
                         <li className='nav-item'>
                             <Link to={'/Dummy'} className='nav-link'>Dummy</Link>
@@ -21,9 +21,6 @@ class Header extends Component {
                         </li>
                         <li className="nav-item">
                             <Link to={'/Doughnutchart'} className="nav-link">Doughnut Chart</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to={'/Dashboard'} className="nav-link">Dashboard</Link>
                         </li>
                         <li className="nav-item">
                             <Link to={'/CommentsAdd'} className="nav-link">Comments Add</Link>

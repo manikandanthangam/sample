@@ -11,6 +11,10 @@ class CommonTable extends Component {
 
     }
 
+    PaginateListFun(eachPaginationData){
+        alert(eachPaginationData);
+    }
+
     render() {
         this.tableListData = this.props.data;
 
@@ -34,29 +38,57 @@ class CommonTable extends Component {
         // }
         // console.log(tableBody);
         // tableBody = this.tableListData.map((eachElement) => {
-            // console.log(eachElement.id);
-            // return false;
-            // console.log(eachElement.header);
-            // return <tr>
-            //     <td>{eachElement.postId}</td>
-            //     <td>{eachElement.id}</td>
-            //     <td>{eachElement.name}</td>
-            //     <td>{eachElement.email}</td>
-            //     <td>{eachElement.body}</td>
-            // </tr>
-           // });
+        // console.log(eachElement.id);
+        // return false;
+        // console.log(eachElement.header);
+        // return <tr>
+        //     <td>{eachElement.postId}</td>
+        //     <td>{eachElement.id}</td>
+        //     <td>{eachElement.name}</td>
+        //     <td>{eachElement.email}</td>
+        //     <td>{eachElement.body}</td>
+        // </tr>
+        // });
         let tableBodyData = [];
         for (let eachBodyData of this.tableListData) {
-            let eachBodyContent = this.tablelistHeader.map((eachHeadData)=> {
+            let eachBodyContent = this.tablelistHeader.map((eachHeadData) => {
                 return <td>{eachBodyData[eachHeadData]}</td>;
             });
-            tableBodyData.push(<tr>{eachBodyContent}</tr>);       
+            tableBodyData.push(<tr>{eachBodyContent}</tr>);
         }
+
+        let tablePaginationData = [1, 2, 3, 4, 5, 6];
+        let tablePaginationBtns = [];
+        let BtnCommonClass = "btn btn-primary pagination-buttons ";
+        let BtnNormalClass = "btn-normal";
+        let BtnActiveClass = "btn-active";
+        tablePaginationBtns.push(<input type="button" className={BtnCommonClass} value="<<" onClick={() => this.PaginateListFun()} />);
+        tablePaginationBtns.push(<input type="button" className={BtnCommonClass} value="<" onClick={() => this.PaginateListFun()} />);
+        for (let eachPaginationData of tablePaginationData) {
+            let BtnAdditionalClass = BtnCommonClass;
+            if (eachPaginationData % 2 === 1) {
+                BtnAdditionalClass += BtnNormalClass;
+            } else {
+                BtnAdditionalClass += BtnActiveClass;
+            }
+            console.log(BtnAdditionalClass);
+            tablePaginationBtns.push(<input type="button" className={BtnAdditionalClass} value={eachPaginationData} onClick={() => this.PaginateListFun(eachPaginationData)} />);
+        }
+        
+        tablePaginationBtns.push(<input type="button" className="btn btn-primary pagination-buttons" value=">" onClick={() => this.PaginateListFun()} />);
+        tablePaginationBtns.push(<input type="button" className="btn btn-primary pagination-buttons" value=">>" onClick={() => this.PaginateListFun()} />);
 
         console.log(this.tableListData);
         console.log(tableBodyData);
         return (
             <div className="TableContainer" id="TableContainer">
+                <div className="row pagination-row">
+                    <div className="col-md-12 pagination-cols">
+                        {tablePaginationBtns}
+                    </div>
+
+                </div>
+
                 <table className="table table-bordered tablelist">
                     <thead>
                         <tr>
