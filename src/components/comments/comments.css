@@ -1,4 +1,4 @@
-#CommentsContainer {
+#CommentsContainer, .commentsview-container {
     margin-top: 30%;
     margin-top: 5vh;
     margin-bottom:50px;
@@ -76,6 +76,86 @@ body {
     transform: rotate(10deg);
     
 }
+.commentsview-container {
+    max-width: 98%;
+    max-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10vh;
+}
+
+.comment-content {
+    border: 1px solid #356599;
+    border-radius: 30px 30px 30px 30px;
+    -moz-border-radius: 30px 30px 30px 30px;
+    -webkit-border-radius: 30px 30px 30px 30px;
+    -webkit-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+}
+
+.comment-data {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-img>img {
+    /* max-width:40%; */
+    border-radius: 30px 30px 30px 30px;
+    -moz-border-radius: 30px 30px 30px 30px;
+    -webkit-border-radius: 30px 30px 30px 30px;
+    border: 0px solid #000000;
+    -webkit-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+}
+
+.commentview-img {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.commentview-img>img {
+    /* max-width:50%; */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 50% 50% 50% 50%;
+    -moz-border-radius: 50% 50% 50% 50%;
+    -webkit-border-radius: 50% 50% 50% 50%;
+    border: 0px solid #000000;
+    -webkit-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: -1px 1px 18px 0px rgba(0, 0, 0, 0.7);
+}
+
+.comment-view>Link {
+    margin-top: 0px;
+}
+
+.commentview-backlink {
+    clear: both;
+    width: 98%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 30px;
+}
+
+.edit-comment, .delete-comment {
+    margin-left: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    float: right;
+}
+
+.edit-comment:hover, .delete-comment:hover {
+    color: #447784;
+}
+
+
 @media (max-width: 768px) {
     #CommentsContainer {
         height:auto;
@@ -86,5 +166,8 @@ body {
     .btn-group {
         width: 100%;
         margin-top: 20px;
+    }
+    .edit-comment, .delete-comment {
+        margin-top:30px;
     }
 }

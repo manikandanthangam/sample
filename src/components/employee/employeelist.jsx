@@ -35,12 +35,6 @@ class EmployeeList extends Component {
                 //always it will executed
             }
             )
-
-
-    }
-
-    viewEmployee(EmpId) {
-        console.log(EmpId);
     }
 
     render() {
@@ -51,6 +45,7 @@ class EmployeeList extends Component {
                 <div className="profile-content">
                     <div className="profile-data profile-img"><img className="img-responsive" src="../assets/profile.jpg" alt='profile' title='profile' /></div>
                     <div className="profile-data profile-name">{eachviewData["name"]}</div>
+                    <div className="profile-data profile-id">{eachviewData["employeeid"]}</div>
                     <div className="profile-data profile-view">
                         <Link to={'/EmployeeDetails'} className="btn btn-primary btn-profileview">View</Link>
                     </div>

@@ -9,6 +9,7 @@ import Dashboard from '../dashboard/dashboard';
 import CommentsAdd from '../comments/comments_add';
 import EmployeeList from '../employee/employeelist';
 import EmployeeDetails from '../employee/employee_details';
+import commentDetails from '../comments/comment_details';
 class Main extends Component {
     render() {
         return (
@@ -23,6 +24,7 @@ class Main extends Component {
                <Route path='/CommentsAdd' component={CommentsAdd}></Route>
                <Route path='/EmployeeList' component={EmployeeList}></Route>
                <Route path='/EmployeeDetails' component={EmployeeDetails}></Route>
+               <Route path='/commentDetails' component={commentDetails}></Route>
             </Switch>
         );
     }

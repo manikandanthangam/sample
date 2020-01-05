@@ -38,3 +38,6 @@ body {
 .tablelist thead th {
     border-bottom: solid #356599 2px;
 }
+.tableView {
+    color:#33869a;
+}

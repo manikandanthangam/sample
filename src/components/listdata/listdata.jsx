@@ -43,7 +43,7 @@ class Listdata extends Component {
 
   getData() {
   }
-  headerData = ["postId", "id", "title", "name", "body"];
+  headerData = ["postId", "id", "title", "name", "body", "view"];
 
   render() {
     console.log('render called');
@@ -51,7 +51,7 @@ class Listdata extends Component {
     return (
       <div className="container" id="ListContainer">
         <div className="row">
-          <CommonTable data={this.commentsData} header={this.headerData}></CommonTable>
+          <CommonTable data={this.commentsData} header={this.headerData} view="./commentDetails"></CommonTable>
         </div>
       </div>
 

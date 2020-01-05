@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class CommonTable extends Component {
     tableListData = [];
@@ -7,6 +8,7 @@ class CommonTable extends Component {
         // console.log(this.props);
         this.tablelistHeader = this.props.header;
         this.tableListData = this.props.data;
+        this.viewComponent = this.props.view;
         // console.log(this.tableListData);
 
     }
@@ -52,7 +54,12 @@ class CommonTable extends Component {
         let tableBodyData = [];
         for (let eachBodyData of this.tableListData) {
             let eachBodyContent = this.tablelistHeader.map((eachHeadData) => {
-                return <td>{eachBodyData[eachHeadData]}</td>;
+                if(eachHeadData === "view"){
+                    return <td><Link className="tableView" to={this.viewComponent}><i className="fas fa-eye"></i></Link></td>;
+                } else {
+                    return <td>{eachBodyData[eachHeadData]}</td>;
+                }
+                
             });
             tableBodyData.push(<tr>{eachBodyContent}</tr>);
         }
