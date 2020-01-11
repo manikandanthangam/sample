@@ -5,12 +5,12 @@ class Dummy extends Component {
         return (
             <div>
                 <p>Dummy page</p>
-                <Dummy1 name="hello"></Dummy1>
-                <Dummy1 name="hnfgn"></Dummy1>
+                <Dummy1 name="hello" data="1"></Dummy1>
+                <Dummy1 name="hnfgn" data="2"></Dummy1>
 
-                <Dummy1 name="hegbfgllo"></Dummy1>
+                <Dummy1 name="hegbfgllo" data="3"></Dummy1>
 
-                <Dummy1 name="gg"></Dummy1>
+                <Dummy1 name="gg" data="4"></Dummy1>
 
             </div>
         );

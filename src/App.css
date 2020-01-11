@@ -28,10 +28,10 @@
 .btn-primary:hover {
   background-color: #10404c !important;
 }
-.btn-normal {
-  background-color:green !important;
-}
+/* .btn-normal {
+  background-color:red !important;
+} */
 .btn-active {
-  background-color: red !important;
+  background-color:green !important;
 }
 
