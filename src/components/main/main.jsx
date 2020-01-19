@@ -24,7 +24,7 @@ class Main extends Component {
                <Route path='/CommentsAdd' component={CommentsAdd}></Route>
                <Route path='/EmployeeList' component={EmployeeList}></Route>
                <Route path='/EmployeeDetails' component={EmployeeDetails}></Route>
-               <Route path='/commentDetails' component={commentDetails}></Route>
+               <Route path='/commentDetails/:id' component={commentDetails}></Route>
             </Switch>
         );
     }

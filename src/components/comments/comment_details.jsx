@@ -1,23 +1,52 @@
 import React, { Component } from 'react';
 import './comments.css';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 class commentDetails extends Component {
+    detailId = "";
+    commentGetData = [];
     constructor(props) {
         super(props);
+        console.log(this.props);
+        // console.log(this.params);
         this.state = {
             isDataReceived: false,
         }
+        this.detailId = this.props.match.params.id;
+        this.getComment();
     }
 
-    commentGetData = {
-        "_id": "5e0843ca80deef85c0a8ef18",
-        "postId": 1,
-        "id": 1,
-        "name": "id labore ex et quam laborum",
-        "email": "Eliseo@gardner.biz",
-        "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+    // commentGetData = {
+    //     "_id": "5e0843ca80deef85c0a8ef18",
+    //     "postId": 1,
+    //     "id": 1,
+    //     "name": "id labore ex et quam laborum",
+    //     "email": "Eliseo@gardner.biz",
+    //     "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+    // }
+
+    getComment() {
+        axios.get("http://localhost:3001/comments/getone/" + this.detailId).then(
+            (response) => {
+                if (response.data !== null) {
+                    this.commentGetData = response.data.data;
+                    console.log(this.commentGetData);
+                    this.setState({isDataReceived:true});
+                }
+            }
+        )
+            .catch(
+                (error) => {
+                    console.log(error);
+                }
+            )
+            .finally(
+                () => {
+                    console.log("completed");
+                }
+            );
     }
 
     EditComment() {
@@ -42,8 +71,29 @@ class commentDetails extends Component {
             );
     }
 
-    DeleteComment() {
-        axios.delete('http://localhost:3001/comments/delete/' + this.commentGetData.id).then(
+    DeleteComment(){
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((UserConfirmation) => {
+            if (UserConfirmation) {
+            //   swal("Poof! Your imaginary file has been deleted!", {
+            //     icon: "success",
+            //   });
+                this.DeleteCommentConfirm();
+            } else {
+            //   swal("Your imaginary file is safe!");
+            }
+          });
+    }
+
+    DeleteCommentConfirm() {
+        console.log(this.commentGetData._id);return false;
+        axios.delete('http://localhost:3001/comments/delete/' + this.commentGetData._id).then(
             (response) => {
                 let resultStatus = response.status;
                 if (resultStatus === "success") {
@@ -64,6 +114,7 @@ class commentDetails extends Component {
     }
     render() {
         let commentLabels = Object.keys(this.commentGetData);
+        console.log(this.commentGetData);
         let viewCommentData = [];
         viewCommentData = commentLabels.map(
             (eachLabel) => {

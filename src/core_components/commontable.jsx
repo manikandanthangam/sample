@@ -72,8 +72,9 @@ class CommonTable extends Component {
         let lastPage    =   this.tableListData.length/this.state.limit;
         for (let eachBodyData of tablePageData) {
             let eachBodyContent = this.tablelistHeader.map((eachHeadData) => {
+                let eachId = eachBodyData["_id"]
                 if(eachHeadData === "view"){
-                    return <td><Link className="tableView" to={this.viewComponent}><i className="fas fa-eye"></i></Link></td>;
+                    return <td><Link className="tableView" to={this.viewComponent+"/"+eachId}><i className="fas fa-eye"></i></Link></td>;
                 } else {
                     return <td>{eachBodyData[eachHeadData]}</td>;
                 }
@@ -108,10 +109,20 @@ class CommonTable extends Component {
         return (
             <div className="TableContainer" id="TableContainer">
                 <div className="row pagination-row">
-                    <div className="col-md-12 pagination-cols">
+                    <div className="col-md-8 pagination-cols">
                         {tablePaginationBtns}
                     </div>
-
+                    <div className="col-md-8 pagination-cols">
+                        <select className="">
+                            <option value="">All</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
                 </div>
 
                 <table className="table table-bordered tablelist">
