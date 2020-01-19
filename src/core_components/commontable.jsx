@@ -72,7 +72,7 @@ class CommonTable extends Component {
         let lastPage    =   this.tableListData.length/this.state.limit;
         for (let eachBodyData of tablePageData) {
             let eachBodyContent = this.tablelistHeader.map((eachHeadData) => {
-                let eachId = eachBodyData["_id"]
+                let eachId = eachBodyData["_id"];
                 if(eachHeadData === "view"){
                     return <td><Link className="tableView" to={this.viewComponent+"/"+eachId}><i className="fas fa-eye"></i></Link></td>;
                 } else {

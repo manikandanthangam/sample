@@ -17,7 +17,6 @@ class EmployeeList extends Component {
 
         axios.get("http://localhost:3001/employee").then(
             (response) => {
-
                 // console.log(response);
                 let resultdata = response.data.data;
                 let resultcount = response.data.count;
@@ -41,13 +40,14 @@ class EmployeeList extends Component {
 
         let tableviewData = [];
         for (let eachviewData of this.listData) {
+            let eachId = eachviewData["_id"];
             tableviewData.push(<div className="col-12 col-sm-6 col-md-6 col-lg-3 profile-container">
                 <div className="profile-content">
                     <div className="profile-data profile-img"><img className="img-responsive" src="../assets/profile.jpg" alt='profile' title='profile' /></div>
                     <div className="profile-data profile-name">{eachviewData["name"]}</div>
                     <div className="profile-data profile-id">{eachviewData["employeeid"]}</div>
                     <div className="profile-data profile-view">
-                        <Link to={'/EmployeeDetails'} className="btn btn-primary btn-profileview">View</Link>
+                        <Link to={'/EmployeeDetails/'+eachId} className="btn btn-primary btn-profileview">View</Link>
                     </div>
                 </div>
             </div>);

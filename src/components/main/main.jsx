@@ -23,7 +23,7 @@ class Main extends Component {
                <Route path='/Dashboard' component={Dashboard}></Route>
                <Route path='/CommentsAdd' component={CommentsAdd}></Route>
                <Route path='/EmployeeList' component={EmployeeList}></Route>
-               <Route path='/EmployeeDetails' component={EmployeeDetails}></Route>
+               <Route path='/EmployeeDetails/:id' component={EmployeeDetails}></Route>
                <Route path='/commentDetails/:id' component={commentDetails}></Route>
             </Switch>
         );

@@ -9,7 +9,7 @@ class commentDetails extends Component {
     commentGetData = [];
     constructor(props) {
         super(props);
-        console.log(this.props);
+        // console.log(this.props);
         // console.log(this.params);
         this.state = {
             isDataReceived: false,
@@ -32,7 +32,7 @@ class commentDetails extends Component {
             (response) => {
                 if (response.data !== null) {
                     this.commentGetData = response.data.data;
-                    console.log(this.commentGetData);
+                    // console.log(this.commentGetData);
                     this.setState({isDataReceived:true});
                 }
             }
@@ -74,7 +74,7 @@ class commentDetails extends Component {
     DeleteComment(){
         swal({
             title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this imaginary file!",
+            text: "Once deleted, you will not be able to recover this comment!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -92,12 +92,15 @@ class commentDetails extends Component {
     }
 
     DeleteCommentConfirm() {
-        console.log(this.commentGetData._id);return false;
+        // console.log(this.commentGetData._id);return false;
         axios.delete('http://localhost:3001/comments/delete/' + this.commentGetData._id).then(
             (response) => {
-                let resultStatus = response.status;
-                if (resultStatus === "success") {
-                    console.log(response);
+                let resultError = response.data.error;
+                if (resultError === null) {
+                    swal("Deleted successfully!", "There is "+response.data.data.deletedCount+" record deleted", "success");
+                    document.location.href = "http://localhost:3000/CommentList";
+                } else {
+                    swal("Delete failed!", response.error, "warning");
                 }
             }
         )

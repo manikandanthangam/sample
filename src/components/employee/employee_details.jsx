@@ -1,31 +1,58 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './employee.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 class EmployeeDetails extends Component {
-    constructor(props){
+    detailId = "";
+    employeeGetData = [];
+    constructor(props) {
         super(props);
         this.state = {
-            isDataReceived:false
+            isDataReceived: false
         }
+        this.detailId = this.props.match.params.id;
+        this.getEmployee();
     }
 
-    employeeGetData = {
-        "name": "Aurora",
-        "age": 53,
-        "email": "ante.blandit@disparturient.ca",
-        "date of joining": "10/06/2019",
-        "phone number": "1628101902299",
-        "street": "493 Iaculis Rd.",
-        "city": "Lewiston",
-        "zip": "42591-180",
-        "region": "Maine",
-        "country": "Sudan",
-        "info": "est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia",
-        "employeeid": 101
-    };
-    
+    // employeeGetData = {
+    //     "name": "Aurora",
+    //     "age": 53,
+    //     "email": "ante.blandit@disparturient.ca",
+    //     "date of joining": "10/06/2019",
+    //     "phone number": "1628101902299",
+    //     "street": "493 Iaculis Rd.",
+    //     "city": "Lewiston",
+    //     "zip": "42591-180",
+    //     "region": "Maine",
+    //     "country": "Sudan",
+    //     "info": "est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia",
+    //     "employeeid": 101
+    // };
+
+    getEmployee() {
+        axios.get("http://localhost:3001/employee/getone/" + this.detailId).then(
+            (response) => {
+                console.log(response);
+                if (response.data !== null) {
+                    this.employeeGetData = response.data.data;
+                    this.setState({ isDataReceived: true });
+                }
+            }
+        )
+            .catch(
+                (error) => {
+                    console.log(error);
+                }
+            )
+            .finally(
+                () => {
+                    console.log("completed");
+                }
+            );
+    }
+
     EditProfile() {
         // alert("edit");
         let inputData = this.employeeGetData;
@@ -33,45 +60,67 @@ class EmployeeDetails extends Component {
             (response) => {
                 console.log(response);
                 let resultStatus = response.status;
-                let resultData  = response.data;
-                if(resultStatus === "success"){
-                    alert(resultStatus+" -> "+resultData);
+                let resultData = response.data;
+                if (resultStatus === "success") {
+                    alert(resultStatus + " -> " + resultData);
                 }
             }
         )
-        .catch(
-            (error) => {
-                console.log(error);
-        }
-        ).finally(
-            () => {
-                // console.log("completed");
-            }
+            .catch(
+                (error) => {
+                    console.log(error);
+                }
+            ).finally(
+                () => {
+                    // console.log("completed");
+                }
 
-        );
+            );
     }
 
-    DeleteProfile() {
-        axios.delete("http://localhost:3001/employee/delete/"+ this.employeeGetData._id).then(
+    DeleteProfile(){
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this employee!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((UserConfirmation) => {
+            if (UserConfirmation) {
+            //   swal("Poof! Your imaginary file has been deleted!", {
+            //     icon: "success",
+            //   });
+                this.DeleteProfileConfirm();
+            } else {
+            //   swal("Your imaginary file is safe!");
+            }
+          });
+    }
+
+    DeleteProfileConfirm() {
+        axios.delete("http://localhost:3001/employee/delete/" + this.employeeGetData._id).then(
             (response) => {
                 console.log(response);
-                let resultStatus = response.status;
-                let resultID = response.id;
-                if(resultStatus === "success"){
-                    alert(resultStatus+" -> "+resultID);
+                let resultError = response.data.error;
+                if (resultError === null) {
+                    swal("Deleted successfully!", "There is "+response.data.data.deletedCount+" record deleted", "success");
+                    document.location.href = "http://localhost:3000/EmployeeList";
+                } else {
+                    swal("Delete failed!", response.error, "warning");
                 }
             }
         )
-        .catch(
-            (error) => {
-                console.log(error);
-        }
-        ).finally(
-            () => {
-                // console.log("completed");
-            }
+            .catch(
+                (error) => {
+                    console.log(error);
+                }
+            ).finally(
+                () => {
+                    // console.log("completed");
+                }
 
-        );
+            );
     }
 
     render() {
@@ -101,17 +150,17 @@ class EmployeeDetails extends Component {
             </tr>
         });
 
-        
+
 
         return (
             <div className="container profileview-container">
-                
+
                 <div className="row profileview-row">
-                <div className="profileview-backlink">
-                    <Link to={'/EmployeeList'} className="btn btn-primary btn-profileview"><i className="fas fa-hand-point-left"></i><i className="fa fa-hand-o-left"></i> Back</Link>
-                    <span className="delete-profile" onClick={() => this.DeleteProfile()}><i className="fas fa-trash-alt"></i></span>
-                    <span className="edit-profile" onClick={() => this.EditProfile()}><i className="fas fa-user-edit"></i></span>
-                </div>
+                    <div className="profileview-backlink">
+                        <Link to={'/EmployeeList'} className="btn btn-primary btn-profileview"><i className="fas fa-hand-point-left"></i><i className="fa fa-hand-o-left"></i> Back</Link>
+                        <span className="delete-profile" onClick={() => this.DeleteProfile()}><i className="fas fa-trash-alt"></i></span>
+                        <span className="edit-profile" onClick={() => this.EditProfile()}><i className="fas fa-user-edit"></i></span>
+                    </div>
                     <div className="col-12 col-sm-12 col-md-12 col-lg-3 profileview-img">
                         <img className="img-responsive" src="../assets/profile.jpg" alt='profile' title='profile' />
                     </div>
