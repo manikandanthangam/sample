@@ -121,7 +121,9 @@ body {
 .edit-profile:hover, .delete-profile:hover {
     color: #447784;
 }
-
+.valueNonEditableIcon {
+    display:none;
+}
 @media (max-width: 768px) {
     .edit-profile, .delete-profile {
         margin-top:30px;
