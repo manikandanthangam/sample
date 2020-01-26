@@ -150,7 +150,6 @@ body {
     font-size: 20px;
     float: right;
 }
-
 .edit-comment:hover, .delete-comment:hover {
     color: #447784;
 }

@@ -20,21 +20,6 @@ class EmployeeDetails extends Component {
         // this.changeData = this.changeData.bind(this);
     }
 
-    // employeeGetData = {
-    //     "name": "Aurora",
-    //     "age": 53,
-    //     "email": "ante.blandit@disparturient.ca",
-    //     "date of joining": "10/06/2019",
-    //     "phone number": "1628101902299",
-    //     "street": "493 Iaculis Rd.",
-    //     "city": "Lewiston",
-    //     "zip": "42591-180",
-    //     "region": "Maine",
-    //     "country": "Sudan",
-    //     "info": "est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia",
-    //     "employeeid": 101
-    // };
-
     getEmployee() {
         axios.get("http://localhost:3001/employee/getone/" + this.detailId).then(
             (response) => {
@@ -67,8 +52,6 @@ class EmployeeDetails extends Component {
     }
 
     changeData(eventData) {
-        console.log(eventData.target.name);
-        console.log(eventData.target.value);
         let inputName = eventData.target.name;
         let inputValue = eventData.target.value;
         let currentData = this.state.editableData;
@@ -78,50 +61,39 @@ class EmployeeDetails extends Component {
     }
 
     UpdateProfile() {
-        let updateProfileData = [];
-        let profileInputJSON = {}
-
-        let employeeLabelsList = Object.keys(this.employeeGetData);
-        for (let keyLoop = 0; keyLoop <= employeeLabelsList.length; keyLoop++) {
+        let profileUpdateJSON = {}
+        let employeeLabelsList = Object.keys(this.state.editableData);
+        for (let keyLoop = 0; keyLoop < employeeLabelsList.length; keyLoop++) {
             let eachLabel = employeeLabelsList[keyLoop];
-            if (eachLabel !== "_id" && eachLabel !== "__v") {
-                // profileInputJSON[eachLabel] = document.getElementById(eachLabel);
-                // console.log(document.getElementById(eachLabel).value);
+            if (eachLabel !== "_id" && eachLabel !== "__v" && this.state.editableStatus[eachLabel] === true) {
+                profileUpdateJSON[eachLabel] = this.state.editableData[eachLabel];
             }
         }
-
-        // let viewProfileData = [];
-        // viewProfileData = employeeLabelsList.map((eachLabel) => {
-        //     return profileInputJSON[eachLabel] = document.getElementById(eachLabel);
-        // });
-        // console.log(viewProfileData);
-
-        updateProfileData.push(profileInputJSON);
-        console.log(updateProfileData);
-        console.log(employeeLabelsList);
-
-        // alert("edit");
-        let inputData = this.employeeGetData;
-        axios.put("http://localhost:3001/employee/update", inputData).then(
-            (response) => {
-                console.log(response);
-                let resultStatus = response.status;
-                let resultData = response.data;
-                if (resultStatus === "success") {
-                    alert(resultStatus + " -> " + resultData);
+        let updateCount = Object.keys(profileUpdateJSON).length;
+        if (updateCount > 0) {
+            profileUpdateJSON["_id"] = this.employeeGetData["_id"];
+            axios.put("http://localhost:3001/employee/update", profileUpdateJSON).then(
+                (response) => {
+                    if (response.error) {
+                        swal("Update failed!", response.error, "warning");
+                    } else {
+                        let updatedStatus = {};
+                        let employeeLabelsList = Object.keys(this.state.editableData);
+                        for (let keyLoop = 0; keyLoop < employeeLabelsList.length; keyLoop++) {
+                            let eachLabel = employeeLabelsList[keyLoop];
+                            updatedStatus[eachLabel] = false;
+                        }
+                        let data = { isDataReceived: true, editableStatus: updatedStatus };
+                        swal("Success", "Profile Updated Successfully!", "success");
+                        this.setState(data);
+                    }
                 }
-            }
-        )
-            .catch(
-                (error) => {
-                    console.log(error);
-                }
-            ).finally(
-                () => {
-                    // console.log("completed");
-                }
-
-            );
+            ).catch((error) => { console.log(error); }
+            ).finally(() => {// console.log("completed");
+            });
+        } else {
+            swal("No change", "Nothing seems updated", "warning");
+        }
     }
 
     DeleteProfile() {
