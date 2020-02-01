@@ -43,7 +43,7 @@ class Listdata extends Component {
 
   getData() {
   }
-  headerData = ["postId", "id", "title", "name", "body", "view"];
+  headerData = ["postId", "id", "name", "body", "view"];
 
   render() {
     console.log('render called');

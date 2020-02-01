@@ -78,7 +78,9 @@ class CommonTable extends Component {
                     let uniqueKeyId = "value_"+eachHeadData+"_"+eachId;
                     return <td key={eachId + eachHeadData}>
                         <div id={"lbl_" + eachHeadData + "_" + eachId}>{eachBodyData[eachHeadData]}</div>
-                        <div id={uniqueKeyId}><input type='text' name={uniqueKeyId} id={uniqueKeyId} value={eachBodyData[eachHeadData]} /></div>
+                        <div id={uniqueKeyId}>
+                            <input type='text' name={uniqueKeyId} id={uniqueKeyId} value={eachBodyData[eachHeadData]} />
+                        </div>
                     </td>;
                 }
 

@@ -6,6 +6,8 @@ class Dummy1 extends Component {
         console.log(this.props.name);
         this.buttonNumber = this.props.data;
         console.log("data: "+this.props.data);
+        this.state = {
+            isDataReceived: false }
     }
 
     sweetSample1(button){
@@ -16,13 +18,34 @@ class Dummy1 extends Component {
         } else {
             swal("Here's a message!", "It's pretty, isn't it?")
         }
-        
+        this.setState({ isDataReceived: true });
+
     }
+
+    componentWillMount(){
+        console.log("component will mount");
+    }
+    componentDidMount(){
+        console.log("component did mount");
+    }
+    componentWillUnmount(){
+        console.log("component will unmount");
+    }
+    
+
+    componentWillUpdate(){
+        console.log("component will update");
+    }
+    componentDidUpdate(){
+        console.log("component did update");
+    }
+
     render() {
         return (
             <div className="container">
                 <p>Dummy 1 {this.props.name} page</p>
                 <input type="button" name="sweetTest1" className="btn btn-primary " value="Sample 1" onClick={()=> this.sweetSample1(this.buttonNumber)} />
+                
             </div>
         );
     }
