@@ -37,4 +37,6 @@
 .btn-active {
   background-color:green !important;
 }
-
+.commentEdit, .commentSave {
+  display:inline-block;
+}

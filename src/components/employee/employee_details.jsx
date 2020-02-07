@@ -3,6 +3,7 @@ import axios from 'axios';
 import './employee.css';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import { EmpConsumer } from '../provider/provider';
 
 class EmployeeDetails extends Component {
     detailId = "";
@@ -21,6 +22,7 @@ class EmployeeDetails extends Component {
     }
 
     getEmployee() {
+
         axios.get("http://localhost:3001/employee/getone/" + this.detailId).then(
             (response) => {
                 console.log(response);
@@ -166,27 +168,37 @@ class EmployeeDetails extends Component {
         });
 
         return (
-            <div className="container profileview-container">
-                <form name="profileUpdate" id="profileUpdate" action="">
-                    <div className="row profileview-row">
-                        <div className="profileview-backlink">
-                            <Link to={'/EmployeeList'} className="btn btn-primary btn-profileview"><i className="fas fa-hand-point-left"></i><i className="fa fa-hand-o-left"></i> Back</Link>
-                            <span className="delete-profile" onClick={() => this.DeleteProfile()}><i className="fas fa-trash-alt"></i></span>
-                            <span className="edit-profile" onClick={() => this.UpdateProfile()}><i className="fas fa-save"></i></span>
+            <React.Fragment>
+                <div className="container profileview-container">
+                    <EmpConsumer>
+                        {
+                            (Employee) => (
+                                <p>Consumer id: {Employee.employeeId}</p>
+                            )
+                        }
+                    </EmpConsumer>
+
+                    <form name="profileUpdate" id="profileUpdate" action="">
+                        <div className="row profileview-row">
+                            <div className="profileview-backlink">
+                                <Link to={'/EmployeeList'} className="btn btn-primary btn-profileview"><i className="fas fa-hand-point-left"></i><i className="fa fa-hand-o-left"></i> Back</Link>
+                                <span className="delete-profile" onClick={() => this.DeleteProfile()}><i className="fas fa-trash-alt"></i></span>
+                                <span className="edit-profile" onClick={() => this.UpdateProfile()}><i className="fas fa-save"></i></span>
+                            </div>
+                            <div className="col-12 col-sm-12 col-md-12 col-lg-3 profileview-img">
+                                <img className="img-responsive" src="../assets/profile.jpg" alt='profile' title='profile' />
+                            </div>
+                            <div className="col-12 col-sm-12 col-md-12 col-lg-9 profileview-content">
+                                <table className="table table-bordered tablelist">
+                                    <tbody>
+                                        {viewProfileData}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-3 profileview-img">
-                            <img className="img-responsive" src="../assets/profile.jpg" alt='profile' title='profile' />
-                        </div>
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-9 profileview-content">
-                            <table className="table table-bordered tablelist">
-                                <tbody>
-                                    {viewProfileData}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
+            </React.Fragment>
         );
     }
 }

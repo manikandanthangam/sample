@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import swal from 'sweetalert';
+import { EmpConsumer } from '../provider/provider';
+
 class Dummy1 extends Component {
     constructor(props) {
         super(props);

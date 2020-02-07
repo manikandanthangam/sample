@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import XLSX from 'xlsx';
 import swal from 'sweetalert';
+import axios from 'axios';
 
 class CommonTable extends Component {
     tableListData = [];
@@ -32,8 +33,20 @@ class CommonTable extends Component {
         // }
 
 
-        this.state = { page: 1, limit: 10 };
+        this.state = {
+            page: 1,
+            limit: 10,
+            id: '',
+            isDataReceived: false
+        };
         // console.log("state status: " + JSON.stringify(this.state));
+        this.onChange = this.onChange.bind(this);
+        this.saveComment = this.saveComment.bind(this);
+    }
+
+    onChange(event) {
+        console.log(event.target.id);
+        console.log(event.target.value);
     }
 
     PaginateListFun(pageValue) {
@@ -47,6 +60,50 @@ class CommonTable extends Component {
         XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
         /* save to file */
         XLSX.writeFile(new_workbook, 'SheetJS.xlsx');
+    }
+
+    editComment(eventData) {
+        // console.log(eventData.target.id);
+        // console.log(eventData);
+        // console.log(eventData.target);
+        let dataId = String(eventData.target.id).split('_')[1];
+        // let elementId = String(eventData.target.id);
+        // let headData = document.getElementById(elementId).getAttribute("data");
+        // console.log(dataId);
+        // Split _
+        // eachHeadData enable _ id enable
+        this.setState({ id: dataId });
+
+    }
+    saveComment(eventData) {
+        // let autoId = this.state.id;
+        let autoId = String(eventData.target.id).split('_')[1];
+        // console.log(autoId);
+        let updatedData = {};
+        updatedData["_id"] = autoId;
+        this.tablelistHeader.map((eachElement) => {
+            if (eachElement !== "view") {
+                updatedData[eachElement] = document.getElementById(eachElement + "_" + autoId).value;
+            }
+        });
+        // console.log(updatedData);
+        axios.put("http://localhost:3001/comments/update", updatedData).then(
+            (response) => {
+                if (response.error) {
+                    swal("Update failed!", response.error, "warning");
+                } else {
+                    let data = { isDataReceived: true, id: '' };
+                    swal("Success", "Comment Updated Successfully!", "success");
+                    this.setState(data);
+                }
+            }
+        ).catch((error) => { console.log(error); }
+        ).finally(() => {// console.log("completed");
+        });
+
+    }
+    deleteComment(autoId) {
+        console.log(autoId);
     }
 
     render() {
@@ -72,14 +129,15 @@ class CommonTable extends Component {
                 if (eachHeadData === "view") {
                     return <td key={eachId + 'eachHeadData'}>
                         <Link className="tableView" to={this.viewComponent + "/" + eachId}><i className="fas fa-eye"></i></Link>
-
+                        <button className="commentEdit" id={"edit_" + eachId} data={eachHeadData} onClick={(event) => this.editComment(event)}><i id={'editI_' + eachId} data={eachHeadData} className="fas fa-edit"></i></button>
+                        <button className="commentSave" id={"save_" + eachId} onClick={(event) => this.saveComment(event)}><i id={"saveI_" + eachId} className="fas fa-save"></i></button>
                     </td>;
                 } else {
-                    let uniqueKeyId = "value_"+eachHeadData+"_"+eachId;
+                    let uniqueKeyId = eachHeadData + "_" + eachId;
                     return <td key={eachId + eachHeadData}>
-                        <div id={"lbl_" + eachHeadData + "_" + eachId}>{eachBodyData[eachHeadData]}</div>
-                        <div id={uniqueKeyId}>
-                            <input type='text' name={uniqueKeyId} id={uniqueKeyId} value={eachBodyData[eachHeadData]} />
+                        {/* <div id={"lbl_" + eachHeadData + "_" + eachId}>{eachBodyData[eachHeadData]}</div> */}
+                        <div id={"input_" + uniqueKeyId} >
+                            <input type='text' disabled={this.state.id !== eachId} name={uniqueKeyId} id={uniqueKeyId} defaultValue={eachBodyData[eachHeadData]} />
                         </div>
                     </td>;
                 }

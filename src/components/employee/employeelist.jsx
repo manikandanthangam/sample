@@ -3,6 +3,7 @@ import axios from 'axios';
 import './employee.css';
 import CommonTable from '../../core_components/commontable';
 import { Link } from 'react-router-dom';
+import { EmpConsumer } from '../provider/provider';
 
 class EmployeeList extends Component {
     listData = [];
@@ -15,7 +16,9 @@ class EmployeeList extends Component {
             isDataReceived: false,
         }
 
-        axios.get("http://localhost:3001/employee").then(
+        let token = sessionStorage.getItem('token');
+
+        axios.get("http://localhost:3001/employee", { headers: { "Authorization2": token } }).then(
             (response) => {
                 // console.log(response);
                 let resultdata = response.data.data;
@@ -47,7 +50,12 @@ class EmployeeList extends Component {
                     <div className="profile-data profile-name">{eachviewData["name"]}</div>
                     <div className="profile-data profile-id">{eachviewData["employeeid"]}</div>
                     <div className="profile-data profile-view">
-                        <Link to={'/EmployeeDetails/'+eachId} className="btn btn-primary btn-profileview">View</Link>
+                        <EmpConsumer>
+                            {employee => (
+                                <Link onClick={() => employee.changevalue(eachId)} to={'/EmployeeDetails/' + eachId} className="btn btn-primary btn-profileview">View</Link>
+                            )}
+                        </EmpConsumer>
+
                     </div>
                 </div>
             </div>);
@@ -55,6 +63,13 @@ class EmployeeList extends Component {
 
         return (
             <div className="container" id="ListViewContainer">
+                <EmpConsumer>
+                    {
+                        (employee) => (
+                            <p>Consumer employee id: {employee.employeeId}</p>
+                        )
+                    }
+                </EmpConsumer>
                 <div className="row">
                     {tableviewData}
                     {/* <div className="col-12 col-sm-6 col-md-6 col-lg-3 profile-container">

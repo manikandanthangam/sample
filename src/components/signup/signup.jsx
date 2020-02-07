@@ -38,7 +38,7 @@ class Signup extends Component {
         } else {
             axios.post("http://localhost:3001/users/checkexist", { email: email }).then(
                 (response) => {
-                    if (response.data.Status) {
+                    if (response.data.Status === 1) {
                         swal("Warning", "Email already created, please try with different email", "warning");
                     } else {
                         let userInputJSON = { first_name: first_name, last_name: last_name, email: email, password: password, phone_number: phone_number };                        
@@ -58,6 +58,7 @@ class Signup extends Component {
             (response) => {
                 if (response.status) {
                     swal("Success", "User created successfully!", "warning");
+                    console.log(response);
                 } else {
                     swal("Failed - " + response.status, "User creation failed!", "failed");
 
